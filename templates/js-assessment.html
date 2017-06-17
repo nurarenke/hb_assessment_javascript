@@ -104,17 +104,26 @@
 
 <script>
   "use strict";
+  // saved the button from the document as a variable
+  var reverseStringBtn = document.getElementById('reverse-string-button');
 
-//  Here's a stub of a function you can use!
+ function reverseString(evt) {
+   var msg = "Porcupines are cute";
+   var newMsg = '';
 
-//  function reverseString(evt) {
-//    var msg = "Porcupines are cute";
-//
-//    // do some stuff here to reverse that string into a new variable
-//    var newMsg = "This should be the reversed string";
-//
-//    alert(newMsg);
-//  }
+   //loop through each letter in the string starting at the last letter 
+   //iterate through the sting going backwards
+   // the .concat() joins strings together to create a new string
+   for(var i = msg.length-1; i >= 0; i--) {
+      newMsg = newMsg.concat(msg[i]);
+   }
+   alert(newMsg);
+  }
+
+  //when you click on the button it runs the reverseString function
+  reverseStringBtn.addEventListener('click', reverseString);
+
+ 
 
 
 </script>
