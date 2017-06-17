@@ -74,7 +74,15 @@
 
 <script>
   "use strict";
-  // code here for above problem
+  var formAction = document.getElementById('prevent-form-submission-form');
+
+  function alertClick(evt) {
+      alert("I don't feel like submitting that");
+      evt.preventDefault();
+  }
+
+  formAction.addEventListener('submit', alertClick);
+
 </script>
 
 <div class="hint">
