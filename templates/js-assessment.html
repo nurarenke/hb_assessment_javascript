@@ -5,6 +5,7 @@
   <title>Skills JavaScript</title>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="static/styles.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
 </head>
 <body class="container">
 
@@ -144,7 +145,10 @@
   "use strict";
   // code here for above problem
   // if user enters 5, result will be 1 + 2 + 3 + 4 + 5 = 15
-  
+
+  // sumToN captures the user input and saves it as n
+  // loops through each number until it gets to n
+  // adds the number at i to the sum 
   function sumToN(evt) {
     var n = document.getElementById('sum-to-n-field').value;
     var sum = 0;
@@ -152,13 +156,15 @@
       sum = i+sum;
     };
 
+    // displays the sum
     var sumDisplay = document.getElementById('sum-to-n-result');
     sumDisplay.innerHTML = sum;
-    
+
     evt.preventDefault();
   }
 
   var sumToNFormAction = document.getElementById('sum-to-n');
+  // when you submit, you run the SumToN function
   sumToNFormAction.addEventListener('submit', sumToN);
 
 
@@ -194,6 +200,12 @@
 <script>
   "use strict";
   // put your code here
+  var kittenImage = $('#kittenz-rule');
+
+  function changeCatPicture() {
+    kittenImage.attr('src', 'https://s-media-cache-ak0.pinimg.com/originals/28/8a/9c/288a9c831c19a4d3607fdee4ed0ac65b.jpg');
+  }
+  kittenImage.on('click', changeCatPicture);
 </script>
 
 <div class="hint">
