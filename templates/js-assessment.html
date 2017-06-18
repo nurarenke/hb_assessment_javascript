@@ -236,7 +236,49 @@
 
 <script>
   "use strict";
-  // put your code here
+
+  var randomNumber = 0;
+
+  function startTheGame(){
+    randomNumber = Math.floor((Math.random() * 100) + 1);
+    $('#number-guessing-msg').empty();
+    $('#play-guessing-game').prop('disabled', true);
+    $('#number-guessed').prop('disabled', false);
+    $('#try-this-number').prop('disabled', false);
+    $('<p>Please guess a number between 1 and 100</p>').appendTo('#number-guessing-msg');
+  }
+
+  function guessingGame(evt) {
+    var numberGuessed = $('#number-guessed').val();
+    var numberGuessedMessage = $('#number-guessing-msg');
+
+    if (numberGuessed > randomNumber) {
+      $('<p>Your guess is too high</p>').appendTo(numberGuessedMessage);
+    }
+    else if (numberGuessed < randomNumber) {
+      $('<p>Your guess is too low</p>').appendTo(numberGuessedMessage);
+    }
+    else {
+      endTheGame();
+      $('<p>Yay! You\'re correct!</p>').appendTo(numberGuessedMessage);
+    }
+
+    evt.preventDefault();  
+  }
+
+  function endTheGame(){
+    $('#play-guessing-game').prop('disabled', false);
+    $('#number-guessed').prop('disabled', true);
+    $('#try-this-number').prop('disabled', true);
+    $('#number-guessed').val('');
+  }
+
+  var playButton = $('#play-guessing-game');
+  playButton.on('click', startTheGame);
+
+  var guessSubmit = $('#guessing-game-form');
+  guessSubmit.on('submit', guessingGame);
+
 </script>
 
 
@@ -303,7 +345,7 @@
   }
 
   // put your code here
-
+  
 </script>
 
 <div class="hint">
