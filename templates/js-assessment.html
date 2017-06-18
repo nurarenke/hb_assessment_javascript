@@ -123,9 +123,6 @@
   //when you click on the button it runs the reverseString function
   reverseStringBtn.addEventListener('click', reverseString);
 
- 
-
-
 </script>
 
 <h3>Sum to n</h3>
@@ -147,6 +144,24 @@
   "use strict";
   // code here for above problem
   // if user enters 5, result will be 1 + 2 + 3 + 4 + 5 = 15
+  
+  function sumToN(evt) {
+    var n = document.getElementById('sum-to-n-field').value;
+    var sum = 0;
+    for(var i=1; i <= n; i++) {
+      sum = i+sum;
+    };
+
+    var sumDisplay = document.getElementById('sum-to-n-result');
+    sumDisplay.innerHTML = sum;
+    
+    evt.preventDefault();
+  }
+
+  var sumToNFormAction = document.getElementById('sum-to-n');
+  sumToNFormAction.addEventListener('submit', sumToN);
+
+
 
 </script>
 
