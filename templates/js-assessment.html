@@ -343,9 +343,21 @@
     $("#t-rex-casualties").append("Innocent bystanders harmed: " + numDead);
     $("#t-rex-img").append(tRexPhoto);
   }
+// put your code here
+  function submitTRexValues(evt) {
+    evt.preventDefault();
 
-  // put your code here
+    var formInput = {
+      'attack-target': $('#t-rex-target').val()
+    };
+
+  $.post('/t-rex-attack.json',
+          formInput,
+          showTRexResults);    
+  }
+
   
+  $('#t-rex-form').on('submit', submitTRexValues);
 </script>
 
 <div class="hint">
