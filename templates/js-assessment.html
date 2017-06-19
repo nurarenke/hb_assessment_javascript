@@ -40,14 +40,15 @@
 <script>
   "use strict";
   // code here for above-problem
+
+  // grab the elements from the DOM
   var message = document.getElementById('message-to-change');
   var button = document.getElementById('change-hello-to-goodbye-button');
 
-  function changeHelloToGoodbye() {
-    message.innerText = 'Goodbye';
-  }
-
-  button.addEventListener('click', changeHelloToGoodbye);
+  // add an event listener that runs a function to change the inner text of message
+  button.addEventListener('click', function(){
+                          message.innerText = 'Goodbye';
+                          });
 </script>
 
 <div class="hint">
@@ -75,13 +76,18 @@
 
 <script>
   "use strict";
+  // saved the form from the document as a variable
   var formAction = document.getElementById('prevent-form-submission-form');
 
+  // alertClick passes in the event argument 
+  // preventDefault() prevents the form from submitting to "some-script"
+  // alertClick calls the alert method with the message to display
   function alertClick(evt) {
       alert("I don't feel like submitting that");
       evt.preventDefault();
   }
 
+  // when the event of submitting the form happens, the callback alertClick is executed
   formAction.addEventListener('submit', alertClick);
 
 </script>
@@ -108,17 +114,18 @@
   // saved the button from the document as a variable
   var reverseStringBtn = document.getElementById('reverse-string-button');
 
- function reverseString(evt) {
-   var msg = "Porcupines are cute";
-   var newMsg = '';
+  function reverseString(evt) {
+     var msg = "Porcupines are cute";
+     var newMsg = '';
 
-   //loop through each letter in the string starting at the last letter 
-   //iterate through the sting going backwards
-   // the .concat() joins strings together to create a new string
-   for(var i = msg.length-1; i >= 0; i--) {
-      newMsg = newMsg.concat(msg[i]);
-   }
-   alert(newMsg);
+     //loop through each letter in the string starting at the last letter 
+     //iterate through the string going backwards
+     // the .concat() joins strings together to create a new string
+     for(var i = msg.length-1; i >= 0; i--) {
+        newMsg = newMsg.concat(msg[i]);
+     }
+
+     alert(newMsg);
   }
 
   //when you click on the button it runs the reverseString function
@@ -164,6 +171,7 @@
   }
 
   var sumToNFormAction = document.getElementById('sum-to-n');
+
   // when you submit, you run the SumToN function
   sumToNFormAction.addEventListener('submit', sumToN);
 
@@ -200,12 +208,17 @@
 <script>
   "use strict";
   // put your code here
+
+  // stored the kitten image from the document
   var kittenImage = $('#kittenz-rule');
 
+  // when the event happens you change the src attribute for the kitten image
   function changeCatPicture() {
     kittenImage.attr('src', 'https://s-media-cache-ak0.pinimg.com/originals/28/8a/9c/288a9c831c19a4d3607fdee4ed0ac65b.jpg');
   }
-  kittenImage.on('click', changeCatPicture);
+
+  // when you double click on the kitten image it executes the changeCatPicture function
+  kittenImage.on('dblclick', changeCatPicture);
 </script>
 
 <div class="hint">
@@ -237,21 +250,37 @@
 <script>
   "use strict";
 
+  // defined randomNumber so functions can reference it in many functions
   var randomNumber = 0;
 
   function startTheGame(){
+    // creates a random number
     randomNumber = Math.floor((Math.random() * 100) + 1);
+
+    // clears the previous results from the div
     $('#number-guessing-msg').empty();
+
+    // disables the play button
     $('#play-guessing-game').prop('disabled', true);
+
+    // enables the input field
     $('#number-guessed').prop('disabled', false);
+
+    // enables the guess button
     $('#try-this-number').prop('disabled', false);
+
+    // asks the user for a number
     $('<p>Please guess a number between 1 and 100</p>').appendTo('#number-guessing-msg');
   }
 
   function guessingGame(evt) {
+    // stores the user's guess
     var numberGuessed = $('#number-guessed').val();
+
+    // stores the response message
     var numberGuessedMessage = $('#number-guessing-msg');
 
+    // after each guess, the div message changes based on the user's guess
     if (numberGuessed > randomNumber) {
       $('<p>Your guess is too high</p>').appendTo(numberGuessedMessage);
     }
@@ -259,23 +288,34 @@
       $('<p>Your guess is too low</p>').appendTo(numberGuessedMessage);
     }
     else {
+      // when you guess the right answer, endTheGame is executed
       endTheGame();
       $('<p>Yay! You\'re correct!</p>').appendTo(numberGuessedMessage);
     }
 
+    // takes the event argument and prevents it from submitting to "do-not-go-here"
     evt.preventDefault();  
   }
 
   function endTheGame(){
+    // enables the play button
     $('#play-guessing-game').prop('disabled', false);
+
+    // disables the input field 
     $('#number-guessed').prop('disabled', true);
+
+    // disables the guess button
     $('#try-this-number').prop('disabled', true);
+
+    // clears out the input field
     $('#number-guessed').val('');
   }
 
+  // starts the game when you press the play button
   var playButton = $('#play-guessing-game');
   playButton.on('click', startTheGame);
 
+  // collects the user's guess every time they press submit
   var guessSubmit = $('#guessing-game-form');
   guessSubmit.on('submit', guessingGame);
 
@@ -344,20 +384,29 @@
     $("#t-rex-img").append(tRexPhoto);
   }
 // put your code here
+
+// this function uses the post method to send an AJAX post request
   function submitTRexValues(evt) {
+
+    // prevents the form from refreshing the page
     evt.preventDefault();
 
+    // save the value of the user input as json syntax
     var formInput = {
       'attack-target': $('#t-rex-target').val()
     };
 
-  $.post('/t-rex-attack.json',
-          formInput,
-          showTRexResults);    
+    // creates an AJAX post request to route /t-rex-attack.json
+    // sends the form input
+    // calls the showTRexResults function
+    $.post('/t-rex-attack.json',
+            formInput,
+            showTRexResults);    
   }
 
-  
+  // on the submit event, submitTRexValues function executes
   $('#t-rex-form').on('submit', submitTRexValues);
+
 </script>
 
 <div class="hint">
